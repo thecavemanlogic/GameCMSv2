@@ -1,7 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
-import { Login } from './pages/Login/login';
+// import { Login } from './pages/Login/login';
 import Cookie from 'js-cookie';
+
+import { Login, Editor, Player } from './pages'
 
 // Code editor?
 // https://codemirror.net/
@@ -9,6 +10,7 @@ import Cookie from 'js-cookie';
 function App() {
 
   if (!Cookie.get('token')) return <Login />
+  else return <Player/>
 
   // console.log(login)
   // return login();

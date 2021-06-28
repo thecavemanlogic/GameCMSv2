@@ -1,5 +1,5 @@
 import React from 'react';
-import './login.css';
+import './Login.css';
 
 class Login extends React.Component {
 
@@ -20,20 +20,31 @@ class Login extends React.Component {
     login() {
         const { username, password } = this.state;
 
+        const credentials = {
+            username: username,
+            password: password
+        };
+
         if (!username || !password) this.setState({ error: 'missing username or password' });
         else {
             this.setState({ error: null });
             
-            fetch('/login', {
+            fetch('/api/login', {
                 method: 'POST',
                 credentials: 'same-origin',
-                body: JSON.stringify('')
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                }),
+                body: JSON.stringify(credentials)
             
             }).then(response => {
                 if (!response.ok) {
                     this.setState({ error: 'invalid credentials' });
+                } else {
+
                 }
-            });
+                console.log(response)
+            })
         }
     }
 
@@ -54,6 +65,4 @@ class Login extends React.Component {
     }
 }
 
-export {
-    Login
-}
+export default Login;

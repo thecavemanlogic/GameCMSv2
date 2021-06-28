@@ -10,12 +10,10 @@ app.use(session({
     saveUninitialized: true,
 }));
 
+app.use(express.json());
+
 // routes not requiring authorization
-app.post('/login', (req, res) => {
-
-
-    console.log("BODY:", req.body)
-
+app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
     
     if (!username || !password) {
@@ -28,6 +26,7 @@ app.post('/login', (req, res) => {
             error: "Invalid credentials"
         });
     } else {
+        res.cookie('token', ';sdlkfj;askdjf;ksdjfa;sdjfdksjf')
         res.send("All good!")
     }
 });
@@ -42,7 +41,7 @@ user.use(function(req, res, next) {
 });
 
 // test code
-user.post('/test', (req, res) => {
+user.post('/api//test', (req, res) => {
     if (!req.body.code || ! req.body.language) {
         res.status(400).send({ error: "Missing code or language" });
         return;
@@ -50,4 +49,4 @@ user.post('/test', (req, res) => {
     res.send("ok")
 });
 
-app.listen(3000);
+app.listen(3001);
